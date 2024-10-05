@@ -4,11 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peddy Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.12/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <header></header>
-    <main></main>
-    <footer></footer>
+<body class="lato-font">
+    <header>
+     <nav class="w-11/12 mx-auto my-5 flex items-center justify-center">
+        <div class="navbar bg-base-100">
+            <div class="navbar-start">
+              <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 6h16M4 12h8m-8 6h16" />
+                  </svg>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <img class="w-full h-4" src="images/logo.webp" alt="">
+                <h2 class="font-bold text-2xl">Peddy</h2>
+              </div>
+            </div>
+            <div class="navbar-center hidden lg:flex">
+              <ul class="menu menu-horizontal px-1 font-medium">
+                <li><a>Home</a></li>
+                <li><a>Shop</a></li>
+                <li><a>Contact</a></li>
+              </ul>
+            </div>
+            <div class="navbar-end">
+              <img class="w-8 h-8" src="https://img.icons8.com/ios/80/user-male-circle.png" alt="">
+            </div>
+          </div>
+     </nav>
+    </header>
+    <main>
+        <!-- banner section -->
+        <section class="w-11/12 mx-auto text-center">
+            <div class="flex justify-center items-center gap-2">
+                <h5 class="text-[#13131399] font-semibold">Bringing Families Together</h5>
+                <img class="w-8 h-8" src="https://img.icons8.com/?size=48&id=QV5JEtrTP6nH&format=png" alt="">
+            </div>
+            <h1 class="text-4xl font-bold bg-[rgb(30, 30, 30);]">Your Path to Adoption <br> Starts Here</h1>
+            <p class="py-5 text-[#131313]">It is a long established fact that a reader will be distracted by the readable content of a page when looking <br> at its layout. The point of using Lorem Ipsum is that it has a.</p>
+            <button class="btn btn-success text-white">View More</button>
+            <img class="mx-auto" src="images/pet.webp" alt="">
+        </section>
+
+
+        <!-- adapt section -->
+         <section class="w-11/12 mx-auto text-center py-10">
+            <h2 class="text-3xl font-bold bg-[rgb(30, 30, 30);]">Adopt  Your  Best Friend</h2>
+            <p class="py-5 text-[#131313]">It is a long established fact that a reader will be distracted by the readable content of a <br> page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
+            
+         </section>
+
+    </main>
+    <footer class="bg-black grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div class="w-11/12 mx-auto px-10 py-5 lg:p-16">
+                <div class="flex items-center gap-2 pb-5">
+                    <img class="w-4 h-4" src="images/logo.webp" alt="">
+                    <h2 class="font-semibold text-2xl text-white">Peddy</h2>
+                </div>
+                <p class="text-white text-sm pb-1"> Location: av. Washington 165, NY CA 54003 </p>
+                <p class="text-white text-sm pb-1"> Phone: +31 85 964 47 25 </p>   
+                <p class="text-white text-sm pb-1"> Email: info@yourdomain.com</p>    
+                <p class="text-white text-sm">Openings hours: 9.00 AM - 5.00 PM</p> 
+                <div class="pt-2 flex gap-2">
+                   <a href=""><img class="w-8 h-8" src="https://img.icons8.com/?size=48&id=118497&format=png" alt=""></a>
+                   <a href=""><img class="w-8 h-8" src="https://img.icons8.com/?size=48&id=16713&format=png" alt=""></a>
+                   <a href=""><img class="w-8 h-8" src="https://img.icons8.com/?size=48&id=19318&format=png" alt=""></a>
+                   <a href=""><img class="w-8 h-8" src="https://img.icons8.com/?size=48&id=Xy10Jcu1L2Su&format=png" alt=""></a>
+                </div>
+            </div>
+            <div class="w-11/12 mx-auto  px-10 py-5 lg:p-16">
+                <h2 class="font-semibold text-xl text-white pb-5">Useful Links</h2>
+                <div class="flex flex-col text-white text-sm gap-1">
+                    <a href="#">Home</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Animals</a>
+                    <a href="#">Foundation</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+            <div class="w-11/12 mx-auto  px-10 py-5 lg:p-16">
+                <h2 class="font-semibold text-xl text-white pb-5">Drop a Message</h2>
+
+               <div class="flex flex-col gap-3">
+                <input
+                type="text"
+                placeholder="Enter your email"
+                class="input input-bordered bg-[rgba(255,255,255,0.05)] mt-2 max-w-xs" />
+                <button class="bg-[#0E7A81] text-white max-w-xs rounded-lg py-2">Subscribe</button>
+               </div>
+            </div>
+        </div>
+
+    </footer>
 
     <!-- script -->
      <script src="js/script.js"></script>
