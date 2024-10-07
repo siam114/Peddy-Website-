@@ -39,6 +39,18 @@ const loadCategoryCard = (id) => {
     .catch(err => console.log(err))
 }
 
+// like imageShow
+const imageShow = (id) => {
+  console.log(id);
+  const imageContainer = document.getElementById('image');
+
+  const images = document.createElement('div');
+  images.innerHTML = `
+      <img class="rounded-md " src = "${id}"/>
+  `
+  imageContainer.appendChild(images)
+}
+
 // create categories
 const displayCategories = (categories) => {
     const categoryContainer = document.getElementById('categories');
@@ -111,7 +123,7 @@ const displayCards = (cards) => {
                           </div>
                       </div>
                       <div class="flex justify-between items-center pt-3">
-                        <button class="border px-3 py-2 rounded-lg text-[#0E7A81] font-semibold hover:border-[#0e798188] hover:bg-[#0e7a811a]"><img class="w-5 h-5" src="https://img.icons8.com/?size=32&id=33481&format=png" alt=""></button>
+                        <button onclick ="imageShow('${card.image}')" class="border px-3 py-2 rounded-lg text-[#0E7A81] font-semibold hover:border-[#0e798188] hover:bg-[#0e7a811a]"><img class="w-5 h-5" src="https://img.icons8.com/?size=32&id=33481&format=png" alt=""></button>
                         <button class="border px-3 py-2 rounded-lg text-[#0E7A81] font-semibold hover:border-[#0e798188] hover:bg-[#0e7a811a]">Adopt</button>
                         <button class="border px-3 py-2 rounded-lg text-[#0E7A81] font-semibold hover:border-[#0e798188] hover:bg-[#0e7a811a]">Details</button>
                       </div>
