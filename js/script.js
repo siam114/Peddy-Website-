@@ -6,6 +6,14 @@ const loadCategories = () => {
     .catch((err) => console.log(err))
 }
 
+const removeActiveClass = () => {
+  const buttons = document.getElementsByClassName("category-btn");
+  console.log(buttons);
+  for(let btn of buttons){
+    btn.classList.remove("active")
+  }
+}
+
 // create load cards
 const loadCards = () => {
     fetch("https://openapi.programming-hero.com/api/peddy/pets")
@@ -19,7 +27,15 @@ const loadCategoryCard = (id) => {
     // alert(id);
     fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
     .then(res => res.json())
-    .then(data => displayCards(data.data))
+    .then(data => {
+      // All active class remove
+      removeActiveClass();
+      // id er active class add
+      const activeBtn = document.getElementById(`btn-${id}`);
+      activeBtn.classList.add("active");
+      console.log(activeBtn)
+      displayCards(data.data)
+    })
     .catch(err => console.log(err))
 }
 
@@ -33,18 +49,14 @@ const displayCategories = (categories) => {
         buttonContainer.classList = "";
         
         buttonContainer.innerHTML = `
-           <button onclick ="loadCategoryCard('${item.category}')" class="lg:px-20 px-5 py-3 border-2 rounded-lg hover:border-[#0e798188] hover:bg-[#0e7a811a] hover:rounded-full font-bold flex flex-row-reverse justify-center gap-3">
+           <button id="btn-${item.category}" onclick ="loadCategoryCard('${item.category}')" class="lg:px-20 px-5 py-3 border-2 rounded-lg hover:border-[#0e798188] hover:bg-[#0e7a811a] font-bold flex justify-center gap-3 category-btn">
+           <img src="${item.category_icon}" class="w-7 h-7"/> 
            ${item.category}
            </button>
            
-        `;
-        const img = document.createElement("img");
-        img.src= item.category_icon;
-        img.classList = "w-7 h-7";
-
+        `
 
         // add button to displayContainer
-        buttonContainer.appendChild(img)
         categoryContainer.append(buttonContainer);
     });
 }

@@ -4,3 +4,9 @@
     font-weight: 400;
     font-style: normal;
   }
+
+  .active{
+    border-color: #0e798188;
+    background-color: #0e7a811a;
+    border-radius: 25px !important;
+  }
