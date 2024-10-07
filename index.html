@@ -14,7 +14,7 @@
         <div class="navbar bg-base-100 ">
             <div class="navbar-start">
               <div class="dropdown">
-                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden " id="hamburger">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-5 w-5"
@@ -30,7 +30,7 @@
                 </div>
                 <ul
                        tabindex="0"
-                      class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-28 p-2 shadow">
+                      class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-28 p-2 shadow hidden" id="menu">
                       <li><a>Home</a></li>
                       <li><a>Shop</a></li>
                       <li><a>Contact</a></li>
@@ -85,7 +85,7 @@
             <!-- sort button and heading -->
             <div class="flex justify-between my-5 items-center">
               <h2 class="font-bold">Best Deal For you</h2>
-              <button class="btn hover:text-black border-none bg-[#0E7A81] text-white max-w-xs rounded-lg px-5 py-2">Sort by Price</button>
+              <button onclick="sortCards()" class="btn hover:text-black border-none bg-[#0E7A81] text-white max-w-xs rounded-lg px-5 py-2">Sort by Price</button>
             </div>
 
             <!-- API main part -->
@@ -107,8 +107,7 @@
 
          <!-- modal section -->
           <section>
-             <!-- Open the modal using ID.showModal() method -->
-           
+           <!-- details modal -->
               <dialog id="detailsModal" class="modal modal-bottom sm:modal-middle p-5">
                  <div class="modal-box">
                    <div id="modal-content">
@@ -122,6 +121,18 @@
                  </div>
                </div>
               </dialog>
+
+          <!-- adapt modal -->
+          <dialog id="detailsModal" class="modal modal-bottom sm:modal-middle p-5">
+            <div class="modal-box">
+              <div id="adapt-content">
+                <img src="https://img.icons8.com/?size=80&id=JDJpJPFVUvFU&format=png" alt="">
+                <h2>Congrats</h2>
+                <p>Adapttion Process is Start For your prts</p>
+
+              </div>
+          </div>
+         </dialog>
 
           </section>
 

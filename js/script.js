@@ -1,3 +1,11 @@
+// bar menu responsive mobile version
+const hamburger = document.getElementById('hamburger');
+const menu = document.getElementById('menu');
+
+hamburger.addEventListener('click', () => {
+  menu.classList.toggle('hidden');
+});
+
 // create load categories
 const loadCategories = () => {
     fetch("https://openapi.programming-hero.com/api/peddy/categories")
@@ -18,7 +26,18 @@ const removeActiveClass = () => {
 const loadCards = () => {
     fetch("https://openapi.programming-hero.com/api/peddy/pets")
     .then(res => res.json())
-    .then(data => displayCards(data.pets))
+    .then(data => {
+      // console.log(data)
+      return displayCards(data.pets)
+    })
+    
+    .catch(err => console.log(err))
+}
+// create sort card
+const sortCards = () => {
+    fetch("https://openapi.programming-hero.com/api/peddy/pets")
+    .then(res => res.json())
+    .then(data => displayCards(data.pets.sort((a, b) => b.price - a.price)))
     .catch(err => console.log(err))
 }
 
@@ -33,7 +52,7 @@ const loadCategoryCard = (id) => {
       // id er active class add
       const activeBtn = document.getElementById(`btn-${id}`);
       activeBtn.classList.add("active");
-      console.log(activeBtn)
+
       displayCards(data.data)
     })
     .catch(err => console.log(err))
@@ -60,7 +79,6 @@ const detailShow = async (id) => {
 }
 // details btn display modal
 const displayDetails = (card) => {
-  console.log(card);
   const detailContainer = document.getElementById('modal-content');
   detailContainer.innerHTML = `
   <figure>
@@ -92,6 +110,7 @@ const displayDetails = (card) => {
              <div class="flex gap-2 items-center">
                <img class="w-5 h-5" src="https://img.icons8.com/?size=32&id=16271&format=png" alt="">
                <h5 class="text-gray-500">vaccinated_status:  ${card.vaccinated_status ? card.vaccinated_status : "N/A"}</h5>
+               
              </div>
          </div>
              <div class="">
