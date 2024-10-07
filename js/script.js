@@ -41,7 +41,7 @@ const loadCategoryCard = (id) => {
 
 // like imageShow
 const imageShow = (id) => {
-  console.log(id);
+  // console.log(id);
   const imageContainer = document.getElementById('image');
 
   const images = document.createElement('div');
@@ -49,6 +49,61 @@ const imageShow = (id) => {
       <img class="rounded-md " src = "${id}"/>
   `
   imageContainer.appendChild(images)
+}
+
+// details btn detailShow api fetch
+const detailShow = async (id) => {
+  const url = `https://openapi.programming-hero.com/api/peddy/pet/${id}`
+  const res = await fetch(url);
+  const data = await res.json();
+  displayDetails(data.petData);
+}
+// details btn display modal
+const displayDetails = (card) => {
+  console.log(card);
+  const detailContainer = document.getElementById('modal-content');
+  detailContainer.innerHTML = `
+  <figure>
+         <img
+           src=${card.image}
+           alt=""
+           class="rounded-xl w-full" />
+       </figure>
+
+       <div class="text-start space-y-1">
+         <h3 class="pt-3 font-bold">${card.pet_name}</h3>
+         <div class ="grid grid-cols-2 gap-1">
+           <div class="flex gap-2 items-center">
+             <img class="w-5 h-5" src="https://img.icons8.com/?size=24&id=S9FoMsb5cl4y&format=png" alt="">
+             <h5 class="text-gray-500">Breed: ${card.breed ? card.breed : "N/A"}</h5>
+           </div>
+             <div class="flex gap-2 items-center">
+               <img class="w-5 h-5" src="https://img.icons8.com/?size=80&id=UTe6yKq2hvHK&format=png" alt="">
+               <h5 class="text-gray-500">Birth: ${card.date_of_birth ? new Date(card.date_of_birth).getFullYear() : "N/A"}</h5>
+             </div>
+             <div class="flex gap-2 items-center">
+               <img class="w-5 h-5" src="https://img.icons8.com/?size=32&id=16271&format=png" alt="">
+               <h5 class="text-gray-500">Gender:  ${card.gender ? card.gender : "N/A"}</h5>
+             </div>
+             <div class="flex gap-2 items-center">
+               <img class="w-5 h-5" src="https://img.icons8.com/?size=64&id=YmwAREsVO2DE&format=png" alt="">
+               <h5 class="text-gray-500">Price :${card.price ? card.price + '$' : "N/A"}</h5>
+             </div>
+             <div class="flex gap-2 items-center">
+               <img class="w-5 h-5" src="https://img.icons8.com/?size=32&id=16271&format=png" alt="">
+               <h5 class="text-gray-500">vaccinated_status:  ${card.vaccinated_status ? card.vaccinated_status : "N/A"}</h5>
+             </div>
+         </div>
+             <div class="">
+                <h3 class="pt-3 font-bold">Details Information</h3>
+                <h5 class="text-gray-500 py-2">${card.pet_details ? card.pet_details : "N/A"}</h5>
+             </div>
+         
+       </div>
+`;
+
+  document.getElementById('detailsModal').showModal()
+
 }
 
 // create categories
@@ -107,25 +162,25 @@ const displayCards = (cards) => {
                       <div>
                         <div class="flex gap-2 items-center">
                           <img class="w-5 h-5" src="https://img.icons8.com/?size=24&id=S9FoMsb5cl4y&format=png" alt="">
-                          <h5 class="text-gray-500">Breed: ${card.breed}</h5>
+                          <h5 class="text-gray-500">Breed: ${card.breed ? card.breed : "N/A"}</h5>
                         </div>
                           <div class="flex gap-2 items-center">
                             <img class="w-5 h-5" src="https://img.icons8.com/?size=80&id=UTe6yKq2hvHK&format=png" alt="">
-                            <h5 class="text-gray-500">Birth: ${card.date_of_birth}</h5>
+                            <h5 class="text-gray-500">Birth: ${card.date_of_birth ? new Date(card.date_of_birth).getFullYear() : "N/A"}</h5>
                           </div>
                           <div class="flex gap-2 items-center">
                             <img class="w-5 h-5" src="https://img.icons8.com/?size=32&id=16271&format=png" alt="">
-                            <h5 class="text-gray-500">Gender: ${card.gender}</h5>
+                            <h5 class="text-gray-500">Gender:  ${card.gender ? card.gender : "N/A"}</h5>
                           </div>
                           <div class="flex gap-2 items-center pb-3 border-b-2">
                             <img class="w-5 h-5" src="https://img.icons8.com/?size=64&id=YmwAREsVO2DE&format=png" alt="">
-                            <h5 class="text-gray-500">Price : ${card.price}$</h5>
+                            <h5 class="text-gray-500">Price :${card.price ? card.price + '$' : "N/A"}</h5>
                           </div>
                       </div>
                       <div class="flex justify-between items-center pt-3">
-                        <button onclick ="imageShow('${card.image}')" class="border px-3 py-2 rounded-lg text-[#0E7A81] font-semibold hover:border-[#0e798188] hover:bg-[#0e7a811a]"><img class="w-5 h-5" src="https://img.icons8.com/?size=32&id=33481&format=png" alt=""></button>
+                        <button onclick ="imageShow('${card.image}')" class="border px-2 sm:px-3 py-2 rounded-lg text-[#0E7A81] font-semibold hover:border-[#0e798188] hover:bg-[#0e7a811a]"><img class="w-5 h-5" src="https://img.icons8.com/?size=32&id=33481&format=png" alt=""></button>
                         <button class="border px-3 py-2 rounded-lg text-[#0E7A81] font-semibold hover:border-[#0e798188] hover:bg-[#0e7a811a]">Adopt</button>
-                        <button class="border px-3 py-2 rounded-lg text-[#0E7A81] font-semibold hover:border-[#0e798188] hover:bg-[#0e7a811a]">Details</button>
+                        <button onclick = "detailShow('${card.petId}')" class="border px-3 py-2 rounded-lg text-[#0E7A81] font-semibold hover:border-[#0e798188] hover:bg-[#0e7a811a]">Details</button>
                       </div>
                       
                     </div>

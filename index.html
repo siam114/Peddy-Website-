@@ -82,13 +82,13 @@
             </div>
 
             <!-- API main part -->
-             <div class="flex  gap-5">
+             <div class="flex gap-2 sm:gap-5">
                 
                 <!-- cards section api part -->
                 <div id="cards" class="w-9/12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 
                 </div>
-                <div class="w-3/12 min-h-[500px] border-2 rounded-md">
+                <div class="w-3/12 min-h-[400px] border-2 rounded-md">
                   <div id="image" class=" grid w-full grid-cols-1 sm:grid-cols-2 gap-1 p-2 sm:gap-5 sm:p-3 ">
 
                   </div>
@@ -97,6 +97,26 @@
              </div>
             
          </section>
+
+         <!-- modal section -->
+          <section>
+             <!-- Open the modal using ID.showModal() method -->
+           
+              <dialog id="detailsModal" class="modal modal-bottom sm:modal-middle p-5">
+                 <div class="modal-box">
+                   <div id="modal-content">
+
+                   </div>
+                 <div class="modal-action rounded-md flex justify-center w-full  bg-[#0e798146]">
+                   <form method="dialog">
+                       <!-- if there is a button in form, it will close the modal -->
+                       <button class="py-3 font-semibold text-[#0E7A81]">Cancel</button>
+                   </form> 
+                 </div>
+               </div>
+              </dialog>
+
+          </section>
 
     </main>
     <footer class="bg-black grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
