@@ -6,6 +6,7 @@ hamburger.addEventListener('click', () => {
   menu.classList.toggle('hidden');
 });
 
+// category btn er active class remove
 const removeActiveClass = () => {
   const buttons = document.getElementsByClassName("category-btn");
   console.log(buttons);
@@ -44,24 +45,44 @@ const displayCategories = (categories) => {
   });
 }
 
+// loading......
+const loadShow = () => {
+
+  setTimeout(() => {
+   loadCards()
+  }, 3000);
+
+
+}
 
 
 // create load cards
 const loadCards = () => {
+   let loading = true;
     fetch("https://openapi.programming-hero.com/api/peddy/pets")
     .then(res => res.json())
     .then(data => {
       // console.log(data)
-      return displayCards(data.pets)
+     
+      setTimeout(() => {
+        loading = false;
+        displayCards(data.pets,loading)
+        
+      }, 3000);
+      // document.getElementById('loading').style.display = 'none';
     })
     
-    .catch(err => console.log(err))
+    .catch(err =>{
+      // document.getElementById('loading').style.display = 'none';
+      console.log(err);
+    })
 }
 
 // create displaycards
-const displayCards = (cards) => {
+const displayCards = (cards,loader) => {
   const cardContainer = document.getElementById('cards');
   cardContainer.innerHTML = "" ;
+  
   if(cards.length == 0){
     cardContainer.classList.remove('grid');
     cardContainer.innerHTML = `
@@ -74,7 +95,12 @@ const displayCards = (cards) => {
   }else{
     cardContainer.classList.add('grid');
   }
-  cards.forEach((card) => {
+  if(loader){
+     document.getElementById('loading').style.display = 'block'
+  }
+  else{
+    document.getElementById('loading').style.display = 'none'
+    cards.forEach((card) => {
       // console.log(card);
       // create card
       const div = document.createElement('div');
@@ -109,7 +135,7 @@ const displayCards = (cards) => {
                     </div>
                     <div class="flex justify-between items-center pt-3">
                       <button onclick ="imageShow('${card.image}')" class="border px-2 sm:px-3 py-2 rounded-lg text-[#0E7A81] font-semibold hover:border-[#0e798188] hover:bg-[#0e7a811a]"><img class="w-5 h-5" src="https://img.icons8.com/?size=32&id=33481&format=png" alt=""></button>
-                      <button onclick ="adoptShow('${card.petId}')" class="border px-3 py-2 rounded-lg text-[#0E7A81] font-semibold hover:border-[#0e798188] hover:bg-[#0e7a811a]">Adopt</button>
+                      <button id="adopt-btn-${card.petId}" onclick ="adoptShow('${card.petId}')" class="border px-3 py-2 rounded-lg font-semibold text-[#0E7A81]  hover:border-[#0e798188] hover:bg-[#0e7a811a]">Adopt</button>
                       <button onclick = "detailShow('${card.petId}')" class="border px-3 py-2 rounded-lg text-[#0E7A81] font-semibold hover:border-[#0e798188] hover:bg-[#0e7a811a]">Details</button>
                     </div>
                     
@@ -118,18 +144,42 @@ const displayCards = (cards) => {
       cardContainer.append(div)
   })
 
+  }
+ 
+
 }
 
 // create sort card
 const sortCards = () => {
-    fetch("https://openapi.programming-hero.com/api/peddy/pets")
-    .then(res => res.json())
-    .then(data => displayCards(data.pets.sort((a, b) => b.price - a.price)))
-    .catch(err => console.log(err))
+  fetch("https://openapi.programming-hero.com/api/peddy/pets")
+  .then(res => res.json())
+  .then(data => {
+      // Filter cards by active category if it exists
+      const filteredCards = activeCategory
+          ? data.pets.filter(card => card.category === activeCategory) 
+          : data.pets;
+
+      // Sort the filtered cards by price
+      const sortedCards = filteredCards.sort((a, b) => b.price - a.price);
+      displayCards(sortedCards);
+  })
+  .catch(err => console.log(err));
 }
+
+let activeCategory = null;
 
 // create buttonclick card
 const loadCategoryCard = (id) => {
+  activeCategory = id;
+
+  // jokhn ami category click korbo kisu show korbe nah
+    const cardContainer = document.getElementById('cards');
+    cardContainer.innerHTML = '';
+
+  document.getElementById('loading').style.display = 'block';
+  setTimeout(() => {
+
+    
     fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
     .then(res => res.json())
     .then(data => {
@@ -142,6 +192,11 @@ const loadCategoryCard = (id) => {
       displayCards(data.data)
     })
     .catch(err => console.log(err))
+    .finally(() => {
+      document.getElementById('loading').style.display = 'none';
+  });
+    
+  }, 3000);
 }
 
 // like imageShow
@@ -212,23 +267,8 @@ const displayDetails = (card) => {
 
 }
 
-// loading......
-const loadShow = () => {
-  let counter = 4;
-  const loadContainer = document.getElementById('loading');
-  loadContainer.classList.remove('hidden');
-  const countdown = setInterval(() => {
-    counter--; 
-    if (counter <= 0) {
-       clearInterval(countdown);
-       loadContainer.classList.add('hidden')
-    }
-}, 1000);
-
-}
-
 // adopt show modal
-const adoptShow = () => {
+const adoptShow = (petId) => {
   let counter = 4;
 
   const countdown = setInterval(() => {
@@ -238,18 +278,25 @@ const adoptShow = () => {
     if (counter <= 0) {
        clearInterval(countdown);
         adoptContainer.innerHTML = `3`
-       document.getElementById('adopt').close()
-      //  document.getElementById('adopt').classList.add('hidden')
+       document.getElementById('adopt').close();
+
+      //  document.getElementById('adopt-btn').disable = true;
+      const adoptBtn = document.getElementById(`adopt-btn-${petId}`);
+       if (adoptBtn) {
+        adoptBtn.disabled = true
+         adoptBtn.innerText = 'Adopted';
+         adoptBtn.classList.remove('text-[#0E7A81]', 'hover:border-[#0e798188]', 'hover:bg-[#0e7a811a]');
+         adoptBtn.classList.add('cursor-not-allowed', 'bg-gray-400');
+       }
     }
 }, 1000);
  
-  // document.getElementById('adopt').classList.remove('hidden')
   document.getElementById('adopt').showModal()
 
 }
 
 
 
-
 loadCategories();
 loadCards();
+loadShow();
