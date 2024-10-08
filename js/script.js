@@ -50,7 +50,7 @@ const loadShow = () => {
 
   setTimeout(() => {
    loadCards()
-  }, 3000);
+  }, 2000);
 
 
 }
@@ -68,7 +68,7 @@ const loadCards = () => {
         loading = false;
         displayCards(data.pets,loading)
         
-      }, 3000);
+      }, 2000);
       // document.getElementById('loading').style.display = 'none';
     })
     
@@ -196,7 +196,7 @@ const loadCategoryCard = (id) => {
       document.getElementById('loading').style.display = 'none';
   });
     
-  }, 3000);
+  }, 2000);
 }
 
 // like imageShow
