@@ -24,5 +24,6 @@ Peddy is an online platform for selling pets, offering a variety of pets from tr
 - looping (forEach)
 - dynamically modal show
 - setInterval and clearInterval
+- menu bar responsive
 
 ## live link :
