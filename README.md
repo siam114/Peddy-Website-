@@ -26,4 +26,4 @@ Peddy is an online platform for selling pets, offering a variety of pets from tr
 - setInterval and clearInterval
 - menu bar responsive
 
-## live link :
+## live link :   https://peddy-website-siam.netlify.app/#adapt
